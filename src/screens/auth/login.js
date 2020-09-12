@@ -5,7 +5,10 @@ import {backIcon} from '../../assets'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
-const Login = ()=>{
+const Login = ({navigation})=>{
+    const goToHome = (screen)=>{
+        navigation.navigate(screen)
+    }
     return(
         <View style={styles.container}>
             <Image source={backIcon} style={styles.iconBack}/>
@@ -16,7 +19,7 @@ const Login = ()=>{
                 <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce'/>
             </View>
             <View style={styles.btnWrapp}>
-                <TouchableOpacity style={styles.loginBtn}>
+                <TouchableOpacity style={styles.loginBtn} onPress={()=> goToHome('Home')}>
                     <Text style={styles.btnDesc}>Login</Text>
                 </TouchableOpacity>
             </View>
@@ -59,8 +62,8 @@ const styles = StyleSheet.create({
     },
     loginBtn:{
         backgroundColor:'#e70510', 
-        borderRadius:25, 
-        paddingVertical:13
+        borderRadius:13, 
+        paddingVertical:10
     },
     btnDesc:{
         fontSize:12,

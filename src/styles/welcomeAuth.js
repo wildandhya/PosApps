@@ -12,17 +12,19 @@ const styles = StyleSheet.create({
     image:{
         width:219, 
         height:117,  
-        marginBottom:10
+        marginBottom:90
     }, 
     textWelcome:{
-        marginBottom:76,
+        marginBottom:90,
         fontSize:20,
         fontWeight:'bold',
         color:'#e70510'
     },
     buttonAction:{
-        marginBottom:43, 
-        maxWidth:225
+        marginBottom:13, 
+        marginTop:2,
+        width:150
+        
     },
     btnDesc:{
         fontSize:12,
@@ -33,8 +35,9 @@ const styles = StyleSheet.create({
     },
     btn:{
         backgroundColor:'#e70510', 
-        borderRadius:25, 
-        paddingVertical:13
+        borderRadius:10, 
+        paddingVertical:10,
+        paddingHorizontal:30
     },
     btnText:{
         color:'white', 

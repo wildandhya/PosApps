@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor:'lightblue'
 
+    },
+    imageUser:{
+        width:26,
+        height:26,
     }
 })
 
