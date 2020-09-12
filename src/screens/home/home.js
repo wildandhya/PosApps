@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text} from 'react-native'
 
-import styles from '../styles/home'
+import styles from '../../styles/home'
 const Home = ()=>{
     return(
         <View style={{flex:1}}>

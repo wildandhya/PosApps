@@ -7,12 +7,16 @@
  */
 
 import React from 'react';
-import {Text} from 'react-native'
-import Home from './src/screens/home';
+
+import Router from './src/router/index';
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
   return (
-    <Home/>
+    <NavigationContainer>
+      <Router/>
+    </NavigationContainer>
+    
   );
 };
 
