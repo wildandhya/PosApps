@@ -1,6 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native'
-import { search } from '../assets'
-import { color } from 'react-native-reanimated'
+
 const {height, width} = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
@@ -18,6 +17,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         borderWidth:1,
         borderColor:'#eeeeee',
+        backgroundColor:'white'
     },
     imageUser:{
         width:29,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     imageCart:{
         width:35,
         height:35,
-        marginLeft:11,
+        marginLeft:8,
         marginTop:3
     },
     searchBar:{
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
         fontSize:13,
         paddingLeft:45,
         paddingRight:20,
-        
         
     },
     addBtn:{
@@ -101,8 +100,7 @@ const styles = StyleSheet.create({
     foodPrice:{
         fontSize:10,
         color:'#9e9a9b',
-        marginLeft:6,
-
+        marginLeft:6
     }
     
 })

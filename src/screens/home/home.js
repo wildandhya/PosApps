@@ -4,8 +4,12 @@ import {StyleSheet, View, Text, Image, ScrollView, TextInput} from 'react-native
 import styles from '../../styles/home'
 import { homeIcon, user, search, saltedEgg, cart, history , add} from '../../assets'
 import { Avatar , Badge} from 'react-native-elements'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const Home = ()=>{
+const Home = ({navigation})=>{
+    const goToCart = (screen)=>{
+        navigation.navigate(screen)
+    }
     return(
         <View style={styles.container}>
             <View style={styles.mainContent}>
@@ -16,17 +20,19 @@ const Home = ()=>{
                         <Image source={search} style={styles.iconSearch}/>
                     </View>
                     {/* <Image source={user} style={styles.imageCart}/>                     */}
-                    <View style={styles.imageCart}>
-                        <Avatar
-                            rounded
-                            source={cart}
-                            size='small'
-                        />
-                        <Badge
-                            status="error" value="0"
-                            containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-                        />
-                    </View>
+                    <TouchableOpacity onPress={()=> goToCart('Cart')}>
+                        <View style={styles.imageCart}>
+                            <Avatar
+                                rounded
+                                source={cart}
+                                size='small'
+                            />
+                            <Badge
+                                status="error" value="0"
+                                containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+                            />
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.foodContainer}>
                     <Text>Food</Text>
