@@ -13,26 +13,23 @@ const styles = StyleSheet.create({
         
     },
     btnNavigation:{
-        height:54, 
+        height:50, 
         flexDirection:'row',
-        borderWidth:1,
-        borderColor:'#eeeeee',
-        backgroundColor:'white'
+        alignItems:'center', 
+        justifyContent:'space-around',
     },
     imageUser:{
         width:29,
         height:29,
-        marginTop:3
     },
     btnIcon:{
         flex:1, 
-        alignItems:'center', 
-        justifyContent:'center'
     },
     btnTitle:{
         fontSize:12,
         color:'#545454',
-        marginTop:2
+        marginTop:2,
+        textAlign:'center'
     },
     imageCart:{
         width:35,

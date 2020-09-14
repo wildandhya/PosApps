@@ -2,8 +2,9 @@ import React from 'react'
 import {  StyleSheet,View, Dimensions } from 'react-native'
 
 import Header from '../../components/cart/header'
-import Content from '../../components/cart/content'
+import Content from '../../components/cart/listCart'
 import Checkout from '../../components/cart/checkout'
+import ButtonNavigation from '../../components/buttonNavigation'
 
 const Cart = ()=>{
     return(
@@ -14,6 +15,7 @@ const Cart = ()=>{
             </View>
             <View>
                 <Checkout/>
+                <ButtonNavigation/>
             </View>
         </View>
 
