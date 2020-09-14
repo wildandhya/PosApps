@@ -5,10 +5,15 @@ import {backIcon} from '../../assets'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
-const Register = ()=>{
+const Register = ({navigation})=>{
+    const handleGoTo = (screen)=>{
+        navigation.navigate(screen)
+    }
     return(
         <View style={styles.container}>
-            <Image source={backIcon} style={styles.iconBack}/>
+            <TouchableOpacity onPress={()=> handleGoTo('WelcomeAuth')}>
+                <Image source={backIcon} style={styles.iconBack}/>
+            </TouchableOpacity>
             
             <View style={styles.form}>
                 <Text style={styles.title}>Register</Text>

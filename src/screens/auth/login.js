@@ -6,12 +6,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 const Login = ({navigation})=>{
-    const goToHome = (screen)=>{
+    const handleGoTo = (screen)=>{
         navigation.navigate(screen)
     }
     return(
         <View style={styles.container}>
-            <Image source={backIcon} style={styles.iconBack}/>
+            <TouchableOpacity onPress={()=> handleGoTo('WelcomeAuth')}>
+                <Image source={backIcon} style={styles.iconBack}/>
+            </TouchableOpacity>
             
             <View style={styles.form}>
                 <Text style={styles.title}>Login</Text>
@@ -19,7 +21,7 @@ const Login = ({navigation})=>{
                 <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce'/>
             </View>
             <View style={styles.btnWrapp}>
-                <TouchableOpacity style={styles.loginBtn} onPress={()=> goToHome('Home')}>
+                <TouchableOpacity style={styles.loginBtn} onPress={()=> handleGoTo('Home')}>
                     <Text style={styles.btnDesc}>Login</Text>
                 </TouchableOpacity>
             </View>
