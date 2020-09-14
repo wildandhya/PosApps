@@ -21,3 +21,5 @@ export const orderWeek = "ORDER_WEEK";
 export const incomeYear = "INCOME_BY_YEAR";
 
 export const searchMenu = "SEARCH_MENU";
+
+export const goHome = "Go_HOME";

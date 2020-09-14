@@ -6,7 +6,10 @@ import Content from '../../components/cart/listCart'
 import Checkout from '../../components/cart/checkout'
 import ButtonNavigation from '../../components/buttonNavigation'
 
-const Cart = ()=>{
+const Cart = ({navigation})=>{
+    const handleGoTo = (screen)=>{
+        navigation.navigate(screen)
+    }
     return(
         <View style={styles.container}>
             <View style={{flex:1}}>
@@ -15,7 +18,7 @@ const Cart = ()=>{
             </View>
             <View>
                 <Checkout/>
-                <ButtonNavigation/>
+                <ButtonNavigation onPress={()=> handleGoTo('Home')}/>
             </View>
         </View>
 

@@ -3,7 +3,8 @@ import {
     pending,
     fulfilled,
     rejected,
-    searchMenu
+    searchMenu,
+    goHome
   } from "../action/actionType";
   
   const initialState = {
@@ -55,6 +56,11 @@ import {
           isFulfilled: true,
           data: payload.data.data,
           isPending: false,
+        };
+      case goHome:
+          return {
+            ...prevState,
+            data:[]
         };
       default:
         return prevState;

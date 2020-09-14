@@ -1,9 +1,9 @@
 import React from 'react'
-import {StyleSheet, View, Text, Image, ScrollView, TextInput} from 'react-native'
+import { View, Text, Image, TouchableOpacity} from 'react-native'
 
 import styles from '../../src/styles/buttonNavigation'
 import { homeIcon, user, history } from '../assets'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import {  } from 'react-native'
 
 const ButtonNavigation = ({onPress}) =>{
     return(

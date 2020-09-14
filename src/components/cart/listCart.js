@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { StyleSheet ,Text, View , Dimensions, Image} from 'react-native' 
 import { useSelector, useDispatch } from 'react-redux'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 
 import {plusBtn, minusBtn} from '../../redux/action/cart'
 
@@ -24,12 +24,13 @@ const Content = ()=>{
       }
     return(
         <Fragment>
+            <ScrollView showsVerticalScrollIndicator={false}>
             {cart.map((item, index)=>{
                 return(
                     <View style={styles.container} key={index}>
                         <View style={styles.cart}>
                             <Image source={{uri:item.image}} style={styles.img}/>
-                            <View style={{marginLeft:15, width:90}}>
+                            <View style={{marginLeft:15, width:100}}>
                                 <Text style={styles.cartTitle}>{item.menu}</Text>
                                 <View style={styles.btnWrapper}>
                                     <TouchableOpacity style={styles.btn} onPress={()=> decreaseBtn(item.id)}>
@@ -48,6 +49,7 @@ const Content = ()=>{
                     </View>
                 )
             })}
+            </ScrollView>
         </Fragment>
         
     )
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     },
     cart:{
         backgroundColor:'#fafafc',
-        width:230,
+        width:250,
         height:80,
         borderRadius:10,
         borderBottomWidth: 3,
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
     },
     price:{
-        marginLeft:20,
+        marginLeft:10,
         marginTop:30
     },
     btnWrapper:{
@@ -90,15 +92,15 @@ const styles = StyleSheet.create({
         marginTop:15
     },
     btn:{
-        width:25,
-        height:20,
+        width:27,
+        height:23,
         borderRadius:6,
-        borderWidth:1,
-        borderColor:'#e70510',
+        backgroundColor:'#e70510',
     },
     iconBtn:{
-        fontSize:20,
+        fontSize:15,
+        fontWeight:'bold',
         textAlign:'center',
-        marginBottom:10
+        color:'white'
     }
 })
