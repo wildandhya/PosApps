@@ -1,4 +1,5 @@
 import { addToCart, deleteMenuAdded, increase, decrease } from "../action/actionType"
+import { deleteMenu } from "../action/cart"
 
 const initialState={
     data :[],
@@ -12,10 +13,14 @@ const cartReducer = (state = initialState, {type, payload})=>{
                 data: [...state.data, payload]
             }
         case deleteMenuAdded:
-            return{
+            let menu = state.data.filter(item => {
+                return item.id !== payload
+            })
+            return {
                 ...state,
-                data: state.data
+                data:menu
             }
+
         case increase:
             let cartData = [...state.data];
             cartData[payload] = {

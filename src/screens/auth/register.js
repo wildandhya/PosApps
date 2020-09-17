@@ -1,13 +1,33 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet,View , Text, TextInput, Image, Dimensions} from 'react-native'
+import {useDispatch} from 'react-redux'
 
 import {backIcon} from '../../assets'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { registerAction } from '../../redux/action/auth'
 
 
 const Register = ({navigation})=>{
+    const dispatch = useDispatch()
+
+
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)
+    }
+    const [form, setForm] = useState({
+        username: '',
+        password: ''
+    })
+
+    const sendData = ()=>{
+       dispatch(registerAction(form))
+    }
+
+    const inputChange = (value, input)=>{
+        setForm({
+            ...form,
+            [input]: value,
+        })
     }
     return(
         <View style={styles.container}>
@@ -17,12 +37,12 @@ const Register = ({navigation})=>{
             
             <View style={styles.form}>
                 <Text style={styles.title}>Register</Text>
-                <TextInput style={styles.input} placeholder='Username' placeholderTextColor='#cfcdce'/>
-                <TextInput style={styles.input} placeholder='Email' placeholderTextColor='#cfcdce'/>
-                <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce'/>
+                <TextInput style={styles.input} placeholder='Username' placeholderTextColor='#cfcdce' value={form.username} onChangeText={(value)=> inputChange(value, 'username')}/>
+                <TextInput style={styles.input} placeholder='Email' placeholderTextColor='#cfcdce' />
+                <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce' value={form.password} onChangeText={(value)=> inputChange(value, 'password')} secureTextEntry={true}/>            
             </View>
             <View style={styles.btnWrapp}>
-                <TouchableOpacity style={styles.registerBtn}>
+                <TouchableOpacity style={styles.registerBtn} onPress={sendData}>
                     <Text style={styles.btnDesc}>Register</Text>
                 </TouchableOpacity>
             </View>
@@ -41,8 +61,8 @@ const styles = StyleSheet.create({
         
     },
     iconBack:{
-        width:25,
-        height:25,
+        width:20,
+        height:20,
     },
     title:{
         fontSize:14, 

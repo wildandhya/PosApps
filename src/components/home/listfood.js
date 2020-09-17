@@ -38,10 +38,10 @@ const ListFood = () =>{
             
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.foodWrapper}>
-                {product.map((item)=>{
+                {product.map((item, index)=>{
                     return(
                         <View >
-                            <View style={styles.cardFood } key={item.id}>
+                            <View style={styles.cardFood } key={index}>
                                 <TouchableOpacity  onPress={()=> addToCart(item.id, item.menu, item.price, item.image)}>
                                     <Image source={{uri:item.image}} style={styles.foodImg}/>
                                 </TouchableOpacity>

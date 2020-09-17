@@ -1,5 +1,5 @@
 import indomieIcon from './images/illusIndomie.png'
-import backIcon from './icon/arrow.png'
+import backIcon from './icon/back.png'
 import logoIndomie from './images/logoIndomie.png'
 import homeIcon from './icon/noodles.png'
 import search from './icon/search.png'
@@ -9,5 +9,9 @@ import plus from './icon/plus.png'
 import history from './icon/history.png'
 import user from './icon/user.png'
 import add from './icon/add.png'
+import menu from './icon/menu.png'
+import goPay from './images/logo-gopay.jpg'
+import ovo from './images/ovo.png'
+import dana from './images/dana.png'
 
-export {indomieIcon, backIcon, logoIndomie, homeIcon, user, search, saltedEgg, cartImage, plus, history, add}
+export {indomieIcon, backIcon, logoIndomie, homeIcon, user, search, saltedEgg, cartImage, plus, history, add, menu, goPay, ovo, dana}

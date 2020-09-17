@@ -1,29 +1,60 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { StyleSheet,View , Text, TextInput, Image, Dimensions} from 'react-native'
 
 import {backIcon} from '../../assets'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import {loginAction} from '../../redux/action/auth'
+import {useDispatch, useSelector} from 'react-redux'
 
 
 const Login = ({navigation})=>{
+    const dispatch = useDispatch()
+
+    const {user, isLogged} = useSelector(state => state.auth)
+    // console.log('ini data', user)
+    
+
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)
+    }
+
+    const [form, setForm] = useState({
+        username: '',
+        password: ''
+    })
+
+    const sendData = ()=>{
+        dispatch(loginAction(form))
+    }
+
+    const inputChange = (value, input)=>{
+        setForm({
+            ...form,
+            [input]: value,
+        })
+    }
+    const submit =()=>{
+        if(isLogged){
+            handleGoTo('Home')
+        }
     }
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={()=> handleGoTo('WelcomeAuth')}>
                 <Image source={backIcon} style={styles.iconBack}/>
             </TouchableOpacity>
-            
             <View style={styles.form}>
                 <Text style={styles.title}>Login</Text>
-                <TextInput style={styles.input} placeholder='Username' placeholderTextColor='#cfcdce'/>
-                <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce'/>
+                <TextInput style={styles.input} placeholder='Username' placeholderTextColor='#cfcdce' value={form.username} onChangeText={(value)=> inputChange(value, 'username')}/>
+                <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce' value={form.password} onChangeText={(value)=> inputChange(value, 'password')} secureTextEntry={true}/>
+                <Text>{}</Text>
             </View>
             <View style={styles.btnWrapp}>
-                <TouchableOpacity style={styles.loginBtn} onPress={()=> handleGoTo('Home')}>
+               {user !== undefined?( <TouchableOpacity style={styles.loginBtn} onPress={sendData}>
                     <Text style={styles.btnDesc}>Login</Text>
-                </TouchableOpacity>
+                </TouchableOpacity>):null
+               }
+               
             </View>
         </View>
     )
@@ -40,15 +71,15 @@ const styles = StyleSheet.create({
         
     },
     iconBack:{
-        width:25,
-        height:25,
+        width:20,
+        height:20,
     },
     title:{
-        fontSize:14, 
+        fontSize:20, 
         fontWeight:'bold',
         marginTop:30, 
         textAlign:'center',
-        color:'#2b2b2b'
+        color:'#323335'
     },
     form:{
         marginTop:80

@@ -22,4 +22,7 @@ export const incomeYear = "INCOME_BY_YEAR";
 
 export const searchMenu = "SEARCH_MENU";
 
-export const goHome = "Go_HOME";
+export const login = "LOGIN";
+
+export const register = "REGISTER";
+export const form = "SET_FORM";

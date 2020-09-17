@@ -10,10 +10,10 @@ export const fetchProduct = ()=>{
     
 }
 
-export const searchMenuCreator = (menu)=>{
+export const searchMenuCreator = (menu, price)=>{
     return {
         type:searchMenu,
-        payload:searchMenuApi(menu)
+        payload:searchMenuApi(menu, price)
         }
     
 }

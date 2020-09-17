@@ -8,12 +8,10 @@ export const addMenu = (data) => {
     };
 
 }
-
-
-export const deleteMenu = (data)=>{
+export const deleteMenu = (id)=>{
     return{
         type:deleteMenuAdded,
-        payload:data
+        payload:id
     }
 }
 

@@ -14,9 +14,6 @@ import {searchMenuCreator} from '../../redux/action/product'
 const Header = ({onPress}) =>{
     const cart = useSelector((state) => state.cart.data)
     const dispatch = useDispatch()
-
-
-
     return(
         <View>
             <View style={{flexDirection:'row', height:50}}>

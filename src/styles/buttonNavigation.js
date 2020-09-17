@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
         
     },
     imageUser:{
-        width:29,
-        height:29,
+        width:22,
+        height:22,
         marginHorizontal:45
     },
     btnIcon:{
