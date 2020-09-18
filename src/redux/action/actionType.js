@@ -26,3 +26,5 @@ export const login = "LOGIN";
 
 export const register = "REGISTER";
 export const form = "SET_FORM";
+
+export const addNewProduct = "ADD_PRODUCT";

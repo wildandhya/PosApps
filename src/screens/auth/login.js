@@ -31,10 +31,9 @@ const Login = ({navigation})=>{
             }else{
                 handleGoTo('Cart')
             }
+        }else{
+            null
         }
-        // }else{
-        //     null
-        // }
         
     }
 

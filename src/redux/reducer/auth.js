@@ -21,6 +21,7 @@ import {
         return {
           ...prevState,
           isPending: true,
+          
         };
   
       case login + rejected:
@@ -29,6 +30,7 @@ import {
           isRejected: true,
           error: payload,
           isPending: false,
+          
         };
       case login + fulfilled:
         if(prevState.user === undefined){

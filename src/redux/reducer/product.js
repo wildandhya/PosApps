@@ -4,7 +4,8 @@ import {
     fulfilled,
     rejected,
     searchMenu,
-    goHome
+    goHome,
+    addNewProduct
   } from "../action/actionType";
   
   const initialState = {
@@ -57,11 +58,26 @@ import {
           data: payload.data.data,
           isPending: false,
         };
-      case goHome:
+        case addNewProduct + pending:
           return {
             ...prevState,
-            data:[]
-        };
+            isPending: true,
+          };
+    
+        case addNewProduct + rejected:
+          return {
+            ...prevState,
+            isRejected: true,
+            error: payload,
+            isPending: false,
+          };
+        case addNewProduct + fulfilled:
+          return {
+            ...prevState,
+            isFulfilled: true,
+            data: payload.data.data,
+            isPending: false,
+          };
       default:
         return prevState;
     }

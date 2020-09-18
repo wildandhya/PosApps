@@ -11,18 +11,20 @@ import {useSelector, useDispatch} from 'react-redux'
 import {searchMenuCreator} from '../../redux/action/product'
 
 
-const Header = ({onPress}) =>{
+const Header = ({navigation}) =>{
     const cart = useSelector((state) => state.cart.data)
     const dispatch = useDispatch()
     return(
         <View>
             <View style={{flexDirection:'row', height:50}}>
-            <Image source={add} style={styles.addBtn}/>
+                <TouchableOpacity onPress={()=>navigation.navigate('AddProduct')}>
+                    <Image source={add} style={styles.addBtn}/>
+                </TouchableOpacity>
             <View style={styles.searchWrapper}>
                 <TextInput placeholder="Search" style={styles.searchBar} onChangeText={(Text)=> dispatch(searchMenuCreator(Text, 'menu'))}/>
                 <Image source={search} style={styles.iconSearch}/>
             </View>
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity onPress={()=> navigation.navigate('Cart')}>
                 <View style={styles.imageCart}>
                     <Avatar
                         rounded

@@ -20,7 +20,7 @@ const Home = ({navigation})=>{
     return(
         <View style={styles.container}>
             <View style={styles.mainContent}>
-                <Header onPress={()=> handleGoTo('Cart')}/>
+                <Header navigation={navigation}/>
                 <ListFood/>  
             </View>
             <ButtonNavigation onPress={()=> handleGoTo('Home')}/>
