@@ -1,19 +1,21 @@
 import Axios from 'axios'
 import { search } from '../assets'
 
+const ip = 'http://192.168.43.107:8000'
+
 export const getProductApi = ()=>{
-    return Axios.get('http://192.168.1.102:8000/product')
+    return Axios.get(`${ip}/product`)
 }
 export const searchMenuApi = (menu, price)=>{
-    return Axios.get(`http://192.168.1.102:8000/product?search=${menu}&sort_by=${price}`)
+    return Axios.get(`${ip}/product?search=${menu}&sort_by=${price}`)
 }
 
 export const loginApi = (data)=>{
-    return Axios.post(`http://192.168.1.102:8000/login`, data)
+    return Axios.post(`${ip}/login`, data)
 }
 
 export const registerApi = (data)=>{
-    return Axios.post(`http://192.168.1.102:8000/register`, data)
+    return Axios.post(`${ip}/register`, data)
 }
 
 

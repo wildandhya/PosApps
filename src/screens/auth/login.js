@@ -11,7 +11,7 @@ const Login = ({navigation})=>{
     const dispatch = useDispatch()
 
     const {user, isLogged} = useSelector(state => state.auth)
-    // console.log('ini data', user)
+   
     
 
     const handleGoTo = (screen)=>{
@@ -25,6 +25,17 @@ const Login = ({navigation})=>{
 
     const sendData = ()=>{
         dispatch(loginAction(form))
+        if(isLogged){
+            if(user.level === 2){
+                handleGoTo("Home")
+            }else{
+                handleGoTo('Cart')
+            }
+        }
+        // }else{
+        //     null
+        // }
+        
     }
 
     const inputChange = (value, input)=>{
@@ -32,11 +43,6 @@ const Login = ({navigation})=>{
             ...form,
             [input]: value,
         })
-    }
-    const submit =()=>{
-        if(isLogged){
-            handleGoTo('Home')
-        }
     }
     return(
         <View style={styles.container}>
@@ -50,9 +56,17 @@ const Login = ({navigation})=>{
                 <Text>{}</Text>
             </View>
             <View style={styles.btnWrapp}>
-               {user !== undefined?( <TouchableOpacity style={styles.loginBtn} onPress={sendData}>
+               {user !== undefined?( 
+                <TouchableOpacity style={styles.loginBtn} onPress={sendData}>
                     <Text style={styles.btnDesc}>Login</Text>
-                </TouchableOpacity>):null
+                </TouchableOpacity>):(
+                <View>
+                    <Text style={{color:'red', marginBottom:20}}>Username or Password is incorect</Text>
+                    <TouchableOpacity style={styles.loginBtn} onPress={sendData}>
+                    <Text style={styles.btnDesc}>Login</Text>
+                </TouchableOpacity>
+                </View>
+               )
                }
                
             </View>
@@ -91,7 +105,7 @@ const styles = StyleSheet.create({
         
     },
     btnWrapp:{
-        marginTop:30
+        
     },
     loginBtn:{
         backgroundColor:'#e70510', 

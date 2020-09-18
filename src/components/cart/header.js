@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         padding:10,
         // backgroundColor:'#fafafc',
         width,
+        marginBottom:10
         
     },
     cart:{
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
     iconBack:{
         width:17,
         height:17,
-        color:'#323335',
         justifyContent:"center"
     },
     iconMenu:{

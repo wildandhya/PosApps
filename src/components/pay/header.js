@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     iconBack:{
         width:17,
         height:17,
-        color:'#323335',
+        // color:'#323335',
        
     },
     iconMenu:{

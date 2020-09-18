@@ -31,13 +31,26 @@ import {
           isPending: false,
         };
       case login + fulfilled:
-        return {
-          ...prevState,
-          isFulfilled: true,
-          user: payload.data.data,
-          isPending: false,
-          isLogged:true
-        };
+        if(prevState.user === undefined){
+          return {
+            ...prevState,
+            isFulfilled: true,
+            user: payload.data.data,
+            isPending: false,
+            isLogged:false
+           
+          };
+        }else{
+          return {
+            ...prevState,
+            isFulfilled: true,
+            user: payload.data.data,
+            isPending: false,
+            isLogged:true
+           
+          };
+        }
+        
         case register + pending:
             return {
               ...prevState,
@@ -52,6 +65,7 @@ import {
               isPending: false,
             };
           case register + fulfilled:
+
             return {
               ...prevState,
               isFulfilled: true,

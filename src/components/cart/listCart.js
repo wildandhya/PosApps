@@ -47,8 +47,8 @@ const Content = ()=>{
             <ScrollView showsVerticalScrollIndicator={false}>
             {cart.map((item, index)=>{
                 return(
-                    <Swipeable renderRightActions={()=>RightAction(item.id)}>
-                       <View style={styles.container} key={index}>
+                    <Swipeable renderRightActions={()=>RightAction(item.id)} key={index}>
+                       <View style={styles.container} >
                            <View style={styles.cart}>
                             <View style={{flexDirection:'row'}}>
                                 <Image source={{uri:item.image}} style={styles.img}/>
