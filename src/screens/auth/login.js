@@ -19,7 +19,7 @@ const Login = ({navigation})=>{
     }
 
     const [form, setForm] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
@@ -50,7 +50,7 @@ const Login = ({navigation})=>{
             </TouchableOpacity>
             <View style={styles.form}>
                 <Text style={styles.title}>Login</Text>
-                <TextInput style={styles.input} placeholder='Username' placeholderTextColor='#cfcdce' value={form.username} onChangeText={(value)=> inputChange(value, 'username')}/>
+                <TextInput style={styles.input} placeholder='Email' placeholderTextColor='#cfcdce' value={form.email} onChangeText={(value)=> inputChange(value, 'email')}/>
                 <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce' value={form.password} onChangeText={(value)=> inputChange(value, 'password')} secureTextEntry={true}/>
                 <Text>{}</Text>
             </View>

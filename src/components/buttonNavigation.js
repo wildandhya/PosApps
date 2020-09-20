@@ -5,11 +5,11 @@ import styles from '../../src/styles/buttonNavigation'
 import { homeIcon, user, history } from '../assets'
 import {  } from 'react-native'
 
-const ButtonNavigation = ({onPress}) =>{
+const ButtonNavigation = ({navigation}) =>{
     return(
         <View style={styles.btnNavigation}>
             <View style={styles.btnIcon}>
-                <TouchableOpacity onPress={onPress}>
+                <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
                     <Image source={homeIcon} style={styles.imageUser}/>
                     <Text style={styles.btnTitle}>Home</Text>
                 </TouchableOpacity>
@@ -18,10 +18,10 @@ const ButtonNavigation = ({onPress}) =>{
                 <Image source={history} style={styles.imageUser} />
                 <Text style={styles.btnTitle}>History</Text>
             </View>
-            <View style={styles.btnIcon}>
+            <TouchableOpacity style={styles.btnIcon} onPress={()=>navigation.navigate('Profile')}>
                 <Image source={user} style={styles.imageUser} />
                 <Text style={styles.btnTitle}>Account</Text>
-            </View>
+            </TouchableOpacity>
         </View>
     )
 }

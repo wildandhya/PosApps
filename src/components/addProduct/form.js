@@ -4,7 +4,7 @@ import { StyleSheet,View , Text, TextInput, Image, Dimensions, Button} from 'rea
 
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {useDispatch, useSelector} from 'react-redux'
-import { addProductCreator, fetchProduct } from '../../redux/action/product'
+// import { addProductCreator, fetchProduct } from '../../redux/action/product'
 
 import Axios from 'axios'
 
@@ -54,7 +54,7 @@ const FormProduct = ({navigation})=>{
 
     const sendData = ()=>{
      let data = new FormData()
-     data.append('menu', form.menumenu);
+     data.append('menu', form.menu);
      data.append('image',{
          uri:`file://${form.image.path}`,
          type:form.image.type,
@@ -74,8 +74,8 @@ const FormProduct = ({navigation})=>{
             accept: 'application/json',
          }
      }
-     const url = `http://192.168.1.100:8000/product`
-     Axios.post(url, data)
+     const url = `${ip}/product`
+     Axios.post(url, data, config)
      .then((res)=>{
          console.log(res)
          setForm({
@@ -84,8 +84,6 @@ const FormProduct = ({navigation})=>{
              price:null,
              image:null
          })
-         dispatch(fetchProduct())
-         navigation.navigate('Home')
      })
      .catch((err)=>{
          console.log(err)

@@ -5,6 +5,8 @@ import { backIcon, profileImage, saltedEgg } from '../../assets'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import RecentOrder from '../../components/profile/recentOrder'
 import LastOrder from '../../components/profile/lastOrder'
+import { form } from '../../redux/action/actionType'
+import { useSelector } from 'react-redux'
 
 
 
@@ -12,6 +14,8 @@ const Profile = ({navigation})=>{
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)
     }
+    const {user} = useSelector(state=>state.auth)
+    console.log(user)
     return(
         <View style={styles.container}>
             <View style={styles.profileWrapp}>
@@ -19,8 +23,8 @@ const Profile = ({navigation})=>{
                  <Text style={styles.signOut}>Sign Out</Text>
                  <View style={styles.profileHeader}>
                   <Image source={profileImage} style={styles.userImg}/>
-                  <Text style={{ color:'#fff', fontWeight:'bold'}}>Wildan Dhya</Text>
-                  <Text style={{ color:'#fff'}}>Wildandhya@gmail.com</Text>
+                  <Text style={{ color:'#fff', fontWeight:'bold'}}>{user.name}</Text>
+                  <Text style={{ color:'#fff'}}>{user.email}</Text>
                   <TouchableOpacity style={styles.editProfile}>
                       <Text>Edit Profile</Text>
                  </TouchableOpacity>
@@ -65,9 +69,10 @@ const styles = StyleSheet.create({
     editProfile:{
         borderWidth:1,
         padding:5,
+        borderColor:'#353535',
         marginTop:5,
         borderRadius:7,
-        backgroundColor:'yellow',
+        backgroundColor:'#fbad18',
        
     },
     segment:{

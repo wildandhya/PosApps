@@ -23,7 +23,7 @@ const Home = ({navigation})=>{
                 <Header navigation={navigation}/>
                 <ListFood/>  
             </View>
-            <ButtonNavigation onPress={()=> handleGoTo('Home')}/>
+            <ButtonNavigation navigation={navigation}/>
         </View>
     )
 }

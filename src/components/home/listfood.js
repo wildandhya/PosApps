@@ -48,7 +48,9 @@ const ListFood = () =>{
                                   <Text style={styles.foodTitle}>{item.menu}</Text>
                                   <Text style={styles.foodPrice}>Rp.{item.price}</Text>
                                 </View>
-                                <Button title='Delete' onPress={()=> dispatch(deleteProductCreator(item.id))}/>
+                                <TouchableOpacity onPress={()=>dispatch(deleteProductCreator(id))}>
+                                  <Text>Delete</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                             

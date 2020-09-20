@@ -94,13 +94,11 @@ import {
             };
           case deleteProduct + fulfilled:
             let deleteData = prevState.data.filter(item =>{
-              return item.id !== payload.id
+              return item.id !== payload
             })
             return {
               ...prevState,
-              isFulfilled: true,
-              data: deleteData,
-              isPending: false,
+             
             };
       default:
         return prevState;

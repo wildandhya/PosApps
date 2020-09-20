@@ -15,7 +15,8 @@ const Register = ({navigation})=>{
         navigation.navigate(screen)
     }
     const [form, setForm] = useState({
-        username: '',
+        name: '',
+        email:'',
         password: ''
     })
 
@@ -37,8 +38,8 @@ const Register = ({navigation})=>{
             
             <View style={styles.form}>
                 <Text style={styles.title}>Register</Text>
-                <TextInput style={styles.input} placeholder='Username' placeholderTextColor='#cfcdce' value={form.username} onChangeText={(value)=> inputChange(value, 'username')}/>
-                <TextInput style={styles.input} placeholder='Email' placeholderTextColor='#cfcdce' />
+                <TextInput style={styles.input} placeholder='Fullname' placeholderTextColor='#cfcdce' value={form.name} onChangeText={(value)=> inputChange(value, 'name')}/>
+                <TextInput style={styles.input} placeholder='Email' placeholderTextColor='#cfcdce' value={form.email} onChangeText={(value)=> inputChange(value, 'email')}/>
                 <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce' value={form.password} onChangeText={(value)=> inputChange(value, 'password')} secureTextEntry={true}/>            
             </View>
             <View style={styles.btnWrapp}>

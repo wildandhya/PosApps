@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
         borderColor: '#ddd',
         // borderBottomWidth: 0,
         shadowColor: '#000',
-        shadowOffset: { width: 7, height: 10 },
+        shadowOffset: { width: 20, height: 30 },
         shadowOpacity: 1,
-        shadowRadius: 4,
-        // elevation: 1,
+        shadowRadius: 10,
+        elevation: 1,
         marginLeft: 5,
         marginRight: 5,
         marginTop: 10,
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         marginHorizontal:8,
+        paddingBottom:5
         
     },
     cardList:{
