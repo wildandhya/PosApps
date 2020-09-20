@@ -1,6 +1,6 @@
-import {getProductApi, searchMenuApi, addProduct} from '../../utils/http'
+import {getProductApi, searchMenuApi, addProduct, deleteProductApi} from '../../utils/http'
 // import Axios from 'axios'
-import {getAllproduct, searchMenu, addNewProduct} from './actionType'
+import {getAllproduct, searchMenu, addNewProduct, deleteProduct} from './actionType'
 
 export const fetchProduct = ()=>{
     return {
@@ -22,6 +22,14 @@ export const addProductCreator = (data)=>{
     return {
         type:addNewProduct,
         payload:addProduct(data)
+        }
+    
+}
+
+export const deleteProductCreator = (id)=>{
+    return {
+        type:deleteProduct,
+        payload:deleteProductApi(id)
         }
     
 }

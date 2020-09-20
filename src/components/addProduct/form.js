@@ -1,26 +1,27 @@
 import React, {useEffect, useState} from 'react'
 import { StyleSheet,View , Text, TextInput, Image, Dimensions, Button} from 'react-native'
 
-import {backIcon} from '../../assets'
+
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import {loginAction} from '../../redux/action/auth'
 import {useDispatch, useSelector} from 'react-redux'
-import { addProductCreator } from '../../redux/action/product'
+import { addProductCreator, fetchProduct } from '../../redux/action/product'
+
+import Axios from 'axios'
 
 import ImagePicker from 'react-native-image-picker'
+import {ip} from '../../utils/http'
 
 
-const FormProduct = ()=>{
+
+const FormProduct = ({navigation})=>{
     const dispatch = useDispatch()
-
-    const {user, isLogged} = useSelector(state => state.auth)
     const [form, setForm] = useState({
-        menu: '',
-        category_id: '',
-        price:'',
-        image:null
-    })
+        menu:null,
+        category_id: null,
+        price:null,
+        image:null,
 
+    })
     const handleChoosePhoto = ()=>{
         const options ={
             title:'Choose Images',
@@ -28,6 +29,7 @@ const FormProduct = ()=>{
                 skipBackup:true,
                 path:'images'
             },
+            noData:true
             
         }
         ImagePicker.showImagePicker(options, Response =>{
@@ -41,42 +43,76 @@ const FormProduct = ()=>{
                 console.log('User Tapped Custom Button', Response.customButton)
 
             }else{
+                const source = Response
                 setForm({
-                    image:Response
+                    ...form,
+                    image:source
                 })
             }
         })
     }
 
     const sendData = ()=>{
-        dispatch(addProductCreator(form))
-    }
-    const inputChange = (value, input)=>{
-        setForm({
-            ...form,
-            [input]: value,
-        })
+     let data = new FormData()
+     data.append('menu', form.menumenu);
+     data.append('image',{
+         uri:`file://${form.image.path}`,
+         type:form.image.type,
+         name:form.image.fileName,
+         size:form.image.fileSize
+
+     })  
+     data.append('price', form.price)
+     data.append('category_id', form.category_id) 
+
+     const config ={
+         header:{
+            'content-type': 'multipart/form-data',
+            contentType: false,
+            mimeType: 'multipart/form-data',
+            'cache-control': 'no-cache',
+            accept: 'application/json',
+         }
+     }
+     const url = `http://192.168.1.100:8000/product`
+     Axios.post(url, data)
+     .then((res)=>{
+         console.log(res)
+         setForm({
+             menu:null,
+             category_id:null,
+             price:null,
+             image:null
+         })
+         dispatch(fetchProduct())
+         navigation.navigate('Home')
+     })
+     .catch((err)=>{
+         console.log(err)
+     })
+     
     }
 
-    const uploadImage = ()=>{
-        const data = new FormData()
-        data.append('image',{
-            uri:image.uri
 
-        })
-    }
+    // const inputChange = (value, input)=>{
+        // setForm({
+        //     ...form,
+        //     [input]: value,
+        // })
+    // }
     return(
         <View style={styles.container}>
             <View style={styles.form}>
-                <TextInput style={styles.input} placeholder='Name' placeholderTextColor='#cfcdce' value={form.menu} onChangeText={(value)=> inputChange(value, 'menu')}/>
-                <TextInput style={styles.input} placeholder='Category' placeholderTextColor='#cfcdce' value={form.category_id} onChangeText={(value)=> inputChange(value, 'category_id')} />
-                <TextInput style={styles.input} placeholder='Price' placeholderTextColor='#cfcdce' value={form.price} onChangeText={(value)=> inputChange(value, 'price')} />
-                {/* <TextInput style={styles.input} placeholder='Image' placeholderTextColor='#cfcdce' value={form.password} onChangeText={(value)=> inputChange(value, 'Image')} /> */}
-                <Button title='choose images' onPress={handleChoosePhoto}/>
+                <TextInput style={styles.input} placeholder='Menu' placeholderTextColor='#cfcdce' value={form.menu} onChangeText={(value)=> setForm({...form, menu:value})}/>
+                <TextInput style={styles.input} placeholder='Category_id' placeholderTextColor='#cfcdce' value={form.category_id} onChangeText={(value)=> setForm({...form, category_id:value})} />
+                <TextInput style={styles.input} placeholder='Price' placeholderTextColor='#cfcdce' value={form.price} onChangeText={(value)=> setForm({...form, price:value})} />
+                <TouchableOpacity onPress={()=>handleChoosePhoto()}>
+                    <Text>Choose Photo</Text>
+                </TouchableOpacity>
                 
             </View>
             <View style={styles.btnWrapp}>
-                <TouchableOpacity style={styles.loginBtn} onPress={sendData}>
+                <TouchableOpacity style={styles.loginBtn} onPress={()=>sendData()}>
                     <Text style={styles.btnDesc}>Add</Text>
                 </TouchableOpacity>
                

@@ -5,7 +5,8 @@ import {
     rejected,
     searchMenu,
     goHome,
-    addNewProduct
+    addNewProduct,
+    deleteProduct
   } from "../action/actionType";
   
   const initialState = {
@@ -78,6 +79,29 @@ import {
             data: payload.data.data,
             isPending: false,
           };
+          case deleteProduct + pending:
+            return {
+              ...prevState,
+              isPending: true,
+            };
+      
+          case deleteProduct + rejected:
+            return {
+              ...prevState,
+              isRejected: true,
+              error: payload,
+              isPending: false,
+            };
+          case deleteProduct + fulfilled:
+            let deleteData = prevState.data.filter(item =>{
+              return item.id !== payload.id
+            })
+            return {
+              ...prevState,
+              isFulfilled: true,
+              data: deleteData,
+              isPending: false,
+            };
       default:
         return prevState;
     }

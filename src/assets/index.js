@@ -13,5 +13,6 @@ import menu from './icon/menu.png'
 import goPay from './images/logo-gopay.jpg'
 import ovo from './images/ovo.png'
 import dana from './images/dana.png'
+import profileImage from './images/user.png'
 
-export {indomieIcon, backIcon, logoIndomie, homeIcon, user, search, saltedEgg, cartImage, plus, history, add, menu, goPay, ovo, dana}
+export {indomieIcon, backIcon, logoIndomie, homeIcon, user, search, saltedEgg, cartImage, plus, history, add, menu, goPay, ovo, dana, profileImage}

@@ -28,3 +28,5 @@ export const register = "REGISTER";
 export const form = "SET_FORM";
 
 export const addNewProduct = "ADD_PRODUCT";
+
+export const deleteProduct = "DELETE_PRODUCT";

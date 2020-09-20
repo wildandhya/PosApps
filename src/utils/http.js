@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { search } from '../assets'
 
-const ip = 'http://192.168.1.101:8000'
+export const ip = 'http://192.168.1.100:8000'
 
 export const getProductApi = ()=>{
     return Axios.get(`${ip}/product`)
@@ -20,5 +20,9 @@ export const registerApi = (data)=>{
 
 export const addProduct = (data)=>{
     return Axios.post(`${ip}/product`, data)
+}
+
+export const deleteProductApi = (id)=>{
+    return Axios.delete(`${ip}/product:${id}`)
 }
 

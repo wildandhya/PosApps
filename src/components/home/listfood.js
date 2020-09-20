@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react'
-import {View, Text, Image, ScrollView, TextInput} from 'react-native'
+import {View, Text, Image, ScrollView, TextInput, Button, FlatList} from 'react-native'
 
 import styles from '../../styles/listFood'
 import {addMenu} from '../../redux/action/cart'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useSelector , useDispatch} from 'react-redux'
+import { deleteProductCreator } from '../../redux/action/product'
 
 const ListFood = () =>{
     const product = useSelector((state) => state.product.data)
@@ -33,7 +34,6 @@ const ListFood = () =>{
         }
       };
     return(
-        <Fragment>
         <View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.foodWrapper}>
@@ -44,8 +44,11 @@ const ListFood = () =>{
                                 <TouchableOpacity  onPress={()=> addToCart(item.id, item.menu, item.price, item.image)}>
                                     <Image source={{uri:item.image}} style={styles.foodImg}/>
                                 </TouchableOpacity>
-                                <Text style={styles.foodTitle}>{item.menu}</Text>
-                                <Text style={styles.foodPrice}>Rp.{item.price}</Text>
+                                <View>
+                                  <Text style={styles.foodTitle}>{item.menu}</Text>
+                                  <Text style={styles.foodPrice}>Rp.{item.price}</Text>
+                                </View>
+                                <Button title='Delete' onPress={()=> dispatch(deleteProductCreator(item.id))}/>
                             </View>
                         </View>
                             
@@ -54,7 +57,7 @@ const ListFood = () =>{
                 </View>
              </ScrollView> 
          </View>
-        </Fragment>  
+ 
              
     )
 }
