@@ -23,10 +23,10 @@ export const addProduct = (data)=>{
 }
 
 export const deleteProductApi = (id)=>{
-    return Axios.delete(`${ip}/product/:${id}`)
+    return Axios.delete(`${ip}/product/${id}`)
 }
 
 export const getUserIdApi = (id)=>{
-    return Axios.delete(`${ip}/user/:${id}`)
+    return Axios.delete(`${ip}/user/${id}`)
 }
 

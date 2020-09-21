@@ -48,12 +48,11 @@ const ListFood = () =>{
                                   <Text style={styles.foodTitle}>{item.menu}</Text>
                                   <Text style={styles.foodPrice}>Rp.{item.price}</Text>
                                 </View>
-                                <TouchableOpacity onPress={()=>dispatch(deleteProductCreator(id))}>
+                                <TouchableOpacity onPress={()=>dispatch(deleteProductCreator(item.id))}>
                                   <Text>Delete</Text>
                                 </TouchableOpacity>
                             </View>
-                        </View>
-                            
+                        </View> 
                         )
                 })} 
                 </View>

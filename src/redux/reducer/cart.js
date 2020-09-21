@@ -16,6 +16,7 @@ const cartReducer = (state = initialState, {type, payload})=>{
             let menu = state.data.filter(item => {
                 return item.id !== payload
             })
+            
             return {
                 ...state,
                 data:menu
