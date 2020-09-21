@@ -13,7 +13,10 @@ import {searchMenuCreator} from '../../redux/action/product'
 
 const Header = ({navigation}) =>{
     const cart = useSelector((state) => state.cart.data)
+    const admin = useSelector((state) => state.auth.isAdmin)
     const dispatch = useDispatch()
+
+    if(admin){
     return(
         <View>
             <View style={{flexDirection:'row', height:50}}>
@@ -40,6 +43,18 @@ const Header = ({navigation}) =>{
         </View>
     </View>
     )
+  }else{
+    return(
+        <View>
+            <View style={{flexDirection:'row', height:50, justifyContent:'center'}}>
+            <View style={styles.searchWrapper}>
+                <TextInput placeholder="Search" style={styles.searchBar} onChangeText={(Text)=> dispatch(searchMenuCreator(Text, 'menu'))}/>
+                <Image source={search} style={styles.iconSearch}/>
+            </View>
+        </View>
+    </View>
+    )
+  }
 }
 
 export default Header

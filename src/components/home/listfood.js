@@ -10,6 +10,7 @@ import { deleteProductCreator } from '../../redux/action/product'
 const ListFood = ({navigation}) =>{
     const product = useSelector((state) => state.product.data)
     const cart = useSelector((state) => state.cart.data)
+    const admin = useSelector((state) => state.auth.isAdmin)
 
     const dispatch = useDispatch()
 
@@ -38,6 +39,7 @@ const ListFood = ({navigation}) =>{
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.foodWrapper}>
                 {product.map((item, index)=>{
+    
                     return(
                         <View key={index}>
                             <View style={styles.cardFood} >
@@ -48,14 +50,15 @@ const ListFood = ({navigation}) =>{
                                   <Text style={styles.foodTitle}>{item.menu}</Text>
                                   <Text style={styles.foodPrice}>Rp.{item.price}</Text>
                                 </View>
-                                <View style={styles.editDeleteWrapp}>
+                                {admin?(<View style={styles.editDeleteWrapp}>
                                     <TouchableOpacity style={styles.editBtn} onPress={()=>navigation.navigate('EditProduct')}>
                                         <Text style={{color:'#000'}}>Edit</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.deleteBtn} onPress={()=>dispatch(deleteProductCreator(item.id))}>
                                         <Text>Delete</Text>
                                     </TouchableOpacity>
-                                </View>
+                                </View>):(null)}
+                                
                             </View>
                         </View> 
                         )

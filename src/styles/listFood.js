@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
     foodPrice:{
         fontSize:13,
         color:'#9e9a9b',
-        marginLeft:6
+        marginLeft:6,
+        paddingVertical:5,
+        // alignSelf:'flex-end'
     },
     deleteBtn:{
         borderWidth:1,

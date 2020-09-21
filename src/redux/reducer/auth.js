@@ -34,7 +34,17 @@ import {
           
         };
       case login + fulfilled:
-        if(payload.data.success){
+        if(payload.data.error){
+          return {
+            ...prevState,
+            isFulfilled: true,
+            user: payload.data.data,
+            isPending: false,
+            isLogged:false,
+            isAdmin:false
+           
+          };
+        }else{
           let admin = null
           let login = null
           if(payload.data.data.level === 2){
@@ -44,20 +54,16 @@ import {
             admin=false
             login=true
           }
-        }else{
-          admin=false
-          login = false
-          
+          return {
+            ...prevState,
+            isFulfilled: true,
+            user: payload.data.data,
+            isPending: false,
+            isLogged:login,
+            isAdmin:admin
+           
+          };
         }
-        return {
-          ...prevState,
-          isFulfilled: true,
-          user: payload.data.data,
-          isPending: false,
-          isLogged:admin,
-          isAdmin:login
-        
-        };
         
         case register + pending:
             return {

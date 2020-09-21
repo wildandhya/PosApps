@@ -13,6 +13,7 @@ const Login = ({navigation})=>{
     const dispatch = useDispatch()
 
     const {user, isLogged} = useSelector(state => state.auth)
+    
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)
     }
@@ -22,6 +23,13 @@ const Login = ({navigation})=>{
         password:yup.string().required().label('password').min(5, 'your password is to weak').max(10),
 
     })
+
+    // useEffect(()=>{
+    //     if(isLogged === true){
+    //         handleGoTo('Home')
+    //     }
+        
+    // }, [])
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={()=> handleGoTo('WelcomeAuth')}>
@@ -32,12 +40,11 @@ const Login = ({navigation})=>{
                 initialValues={{email:'', password:''}}
                 validationSchema={formValidation}
                 onSubmit={(values, actions) =>{
-                    actions.resetForm()
+                     actions.resetForm()
                     dispatch(loginAction(values))
                     if(isLogged === true){
                         handleGoTo("Home")
-                    }
-                    
+                        } 
                 }}
                 >
                     {(formikProps)=> (
@@ -61,6 +68,7 @@ const Login = ({navigation})=>{
                                    onChangeText={formikProps.handleChange("password")}
                                    value={formikProps.values.password}
                                    onBlur={formikProps.handleBlur('password')}
+                                   secureTextEntry
                                  />
                                  <Text style={{color:"red"}}>{formikProps.errors.password}</Text>
                             </View>

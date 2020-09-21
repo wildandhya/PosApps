@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         height:50, 
         flexDirection:'row',
         alignItems:'center', 
-        backgroundColor:'white'
+        backgroundColor:'white',
+        paddingTop:5
         
     },
     imageUser:{
@@ -23,6 +24,12 @@ const styles = StyleSheet.create({
         color:'#545454',
         marginTop:2,
         textAlign:'center'
+    },
+    cart:{
+        width:22,
+        height:22,
+        marginHorizontal:45,
+        marginBottom:20
     },
     
 })
