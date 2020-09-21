@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         
     },
     loginBtn:{
-        backgroundColor:'#e70510', 
+        backgroundColor:'#6e241c', 
         borderRadius:13, 
         paddingVertical:10
     },

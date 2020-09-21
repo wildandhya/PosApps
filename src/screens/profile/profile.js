@@ -4,7 +4,7 @@ import { backIcon, profileImage, saltedEgg } from '../../assets'
 
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import RecentOrder from '../../components/profile/recentOrder'
-import LastOrder from '../../components/profile/lastOrder'
+
 import { form } from '../../redux/action/actionType'
 import { useSelector } from 'react-redux'
 
@@ -20,14 +20,18 @@ const Profile = ({navigation})=>{
         <View style={styles.container}>
             <View style={styles.profileWrapp}>
              <ImageBackground source={saltedEgg} style={styles.backgroundImg}>
-                 <FlatList></FlatList>
+                 <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:10, marginHorizontal:8}}>
+                <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={{marginTop:5,}}>
+                    <Image source={backIcon} style={styles.iconBack}/>
+                </TouchableOpacity>
                  <Text style={styles.signOut}>Sign Out</Text>
+                 </View>
                  <View style={styles.profileHeader}>
                   <Image source={profileImage} style={styles.userImg}/>
                   <Text style={{ color:'#fff', fontWeight:'bold'}}>{user.name}</Text>
                   <Text style={{ color:'#fff'}}>{user.email}</Text>
                   <TouchableOpacity style={styles.editProfile}>
-                      <Text>Edit Profile</Text>
+                      <Text style={{color:'#fff'}}>Edit Profile</Text>
                  </TouchableOpacity>
                </View>
             </ImageBackground>
@@ -53,6 +57,11 @@ const styles = StyleSheet.create({
         flex:1
         
     },
+    iconBack:{
+        width:17,
+        height:17,
+        // justifyContent:"center"
+    },
     userImg:{
         width:70,
         height:70,
@@ -62,7 +71,7 @@ const styles = StyleSheet.create({
     },
     profileHeader:{
         alignItems:"center",
-        paddingVertical:20,
+        paddingVertical:8,
         justifyContent:'center',
        
         
@@ -73,7 +82,7 @@ const styles = StyleSheet.create({
         borderColor:'#353535',
         marginTop:5,
         borderRadius:7,
-        backgroundColor:'#fbad18',
+        backgroundColor:'#5e5c5d',
        
     },
     segment:{
@@ -92,10 +101,10 @@ const styles = StyleSheet.create({
         backgroundColor:'black'
     },
     signOut:{
-        alignSelf:'flex-end',
+        
         color:'#fff',
         fontWeight:'bold',
-        marginRight:8,
-        marginTop:5
+        
+        
     }
 })

@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         marginTop:30
     },
     registerBtn:{
-        backgroundColor:'#e70510', 
+        backgroundColor:'#6e241c', 
         borderRadius:25, 
         paddingVertical:13
     },
