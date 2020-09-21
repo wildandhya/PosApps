@@ -7,5 +7,6 @@ import Cart from '../screens/cart'
 import Pay from '../screens/cart/pay'
 import AddProduct from '../screens/home/addProduct'
 import Profile from '../screens/profile/profile'
+import EditProduct from '../screens/home/editProduct'
 
-export {Home, Login, Register, WelcomeAuth, SplashScreen, Cart, Pay, AddProduct, Profile}
+export {Home, Login, Register, WelcomeAuth, SplashScreen, Cart, Pay, AddProduct, Profile, EditProduct}

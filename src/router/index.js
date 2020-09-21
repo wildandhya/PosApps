@@ -1,12 +1,12 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
-import {Home, Login, Register, WelcomeAuth, SplashScreen, Cart, Pay, AddProduct, Profile} from '../screens'
+import {Home, Login, Register, WelcomeAuth, SplashScreen, Cart, Pay, AddProduct, Profile, EditProduct} from '../screens'
 
 const Stack = createStackNavigator()
 
 const Router = () =>{
     return(
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Register'>
             <Stack.Screen name='SplashScreen' component={SplashScreen} options={{
                 headerShown:false
             }}/>
@@ -32,6 +32,9 @@ const Router = () =>{
                 headerShown:false
             }}  />
              <Stack.Screen name='Profile' component={Profile}  options={{
+                headerShown:false
+            }}  />
+            <Stack.Screen name='EditProduct' component={EditProduct}  options={{
                 headerShown:false
             }}  />
         </Stack.Navigator>

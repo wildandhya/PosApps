@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useSelector , useDispatch} from 'react-redux'
 import { deleteProductCreator } from '../../redux/action/product'
 
-const ListFood = () =>{
+const ListFood = ({navigation}) =>{
     const product = useSelector((state) => state.product.data)
     const cart = useSelector((state) => state.cart.data)
 
@@ -44,13 +44,18 @@ const ListFood = () =>{
                                 <TouchableOpacity  onPress={()=> addToCart(item.id, item.menu, item.price, item.image)}>
                                     <Image source={{uri:item.image}} style={styles.foodImg}/>
                                 </TouchableOpacity>
-                                <View>
+                                <View style={{maxWidth:100}}>
                                   <Text style={styles.foodTitle}>{item.menu}</Text>
                                   <Text style={styles.foodPrice}>Rp.{item.price}</Text>
                                 </View>
-                                <TouchableOpacity onPress={()=>dispatch(deleteProductCreator(item.id))}>
-                                  <Text>Delete</Text>
-                                </TouchableOpacity>
+                                <View style={styles.editDeleteWrapp}>
+                                    <TouchableOpacity style={styles.editBtn} onPress={()=>navigation.navigate('EditProduct')}>
+                                        <Text style={{color:'#000'}}>Edit</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.deleteBtn} onPress={()=>dispatch(deleteProductCreator(item.id))}>
+                                        <Text>Delete</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View> 
                         )

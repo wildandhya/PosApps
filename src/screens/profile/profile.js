@@ -2,7 +2,7 @@ import React from 'react'
 import {  StyleSheet,View, Dimensions , Image, Text, ImageBackground} from 'react-native'
 import { backIcon, profileImage, saltedEgg } from '../../assets'
 
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import RecentOrder from '../../components/profile/recentOrder'
 import LastOrder from '../../components/profile/lastOrder'
 import { form } from '../../redux/action/actionType'
@@ -20,6 +20,7 @@ const Profile = ({navigation})=>{
         <View style={styles.container}>
             <View style={styles.profileWrapp}>
              <ImageBackground source={saltedEgg} style={styles.backgroundImg}>
+                 <FlatList></FlatList>
                  <Text style={styles.signOut}>Sign Out</Text>
                  <View style={styles.profileHeader}>
                   <Image source={profileImage} style={styles.userImg}/>
@@ -46,8 +47,8 @@ export default Profile
 const {height, width} = Dimensions.get('screen')
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:'#e7ebef',
-        // backgroundColor:'#fff',
+        // backgroundColor:'#e7ebef',
+        backgroundColor:'#fff',
         height,
         flex:1
         

@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
     },
     card:{
-        backgroundColor:'#e7ebef',
+        // backgroundColor:'#e7ebef',
        
         
     },

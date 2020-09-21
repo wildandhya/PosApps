@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { search } from '../assets'
 
-export const ip = 'http://192.168.43.107:8000'
+export const ip = 'http://192.168.1.101:8000'
 
 export const getProductApi = ()=>{
     return Axios.get(`${ip}/product`)

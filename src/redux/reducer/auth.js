@@ -12,7 +12,8 @@ import {
     isPending: false,
     isFulfilled: false,
     isRejected: false,
-    isLogged:false
+    isLogged:false,
+    isAdmin:false
   };
   
   const authReducer = (prevState = initialState, { type, payload }) => {
@@ -33,25 +34,30 @@ import {
           
         };
       case login + fulfilled:
-        if(prevState.user === undefined){
-          return {
-            ...prevState,
-            isFulfilled: true,
-            user: payload.data.data,
-            isPending: false,
-            isLogged:false
-           
-          };
+        if(payload.data.success){
+          let admin = null
+          let login = null
+          if(payload.data.data.level === 2){
+            admin=true
+            login=true
+          }else{
+            admin=false
+            login=true
+          }
         }else{
-          return {
-            ...prevState,
-            isFulfilled: true,
-            user: payload.data.data,
-            isPending: false,
-            isLogged:true
-           
-          };
+          admin=false
+          login = false
+          
         }
+        return {
+          ...prevState,
+          isFulfilled: true,
+          user: payload.data.data,
+          isPending: false,
+          isLogged:admin,
+          isAdmin:login
+        
+        };
         
         case register + pending:
             return {

@@ -12,7 +12,20 @@ const styles = StyleSheet.create({
         marginTop:5
     },
     cardFood:{
-        margin:5
+        
+        borderWidth: 1,
+        borderRadius: 8,
+        borderColor: '#ddd',
+        // borderBottomWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 20, height: 30 },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 1,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        backgroundColor:'#fff'
         
     },
     header:{
@@ -22,18 +35,39 @@ const styles = StyleSheet.create({
         width:150,
         height:100,
         borderWidth:1,
-        borderRadius:18,
+        borderRadius:8,
         borderColor:'#efefef',
     },
     foodTitle:{
-        fontSize:12,
+        fontSize:14,
         marginLeft:6,
         color:'black'
     },
     foodPrice:{
-        fontSize:10,
+        fontSize:13,
         color:'#9e9a9b',
         marginLeft:6
+    },
+    deleteBtn:{
+        borderWidth:1,
+        backgroundColor:'#ffe701',
+        borderRadius:4,
+        borderColor:'#ddd',
+        padding:4,
+        alignItems:'center'
+    },
+    editBtn:{
+        borderWidth:1,
+        backgroundColor:'#7cdc39',
+        borderRadius:4,
+        borderColor:'#ddd',
+        padding:4,
+        alignItems:'center',
+        marginBottom:5
+    },
+    editDeleteWrapp:{
+        padding:5
+        
     }
     
 })

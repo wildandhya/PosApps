@@ -5,71 +5,86 @@ import {backIcon} from '../../assets'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {loginAction} from '../../redux/action/auth'
 import {useDispatch, useSelector} from 'react-redux'
+import {Formik} from 'formik'
+import * as yup from 'yup'
 
 
 const Login = ({navigation})=>{
     const dispatch = useDispatch()
 
     const {user, isLogged} = useSelector(state => state.auth)
-   
-    
-
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)
     }
 
-    const [form, setForm] = useState({
-        email: '',
-        password: ''
+    const formValidation = yup.object().shape({
+        email:yup.string().required().label('email').email(),
+        password:yup.string().required().label('password').min(5, 'your password is to weak').max(10),
+
     })
-
-    const sendData = ()=>{
-        dispatch(loginAction(form))
-        if(isLogged){
-            if(user.level === 2){
-                handleGoTo("Home")
-            }else{
-                handleGoTo('Cart')
-            }
-        }else{
-            null
-        }
-        
-    }
-
-    const inputChange = (value, input)=>{
-        setForm({
-            ...form,
-            [input]: value,
-        })
-    }
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={()=> handleGoTo('WelcomeAuth')}>
                 <Image source={backIcon} style={styles.iconBack}/>
             </TouchableOpacity>
-            <View style={styles.form}>
-                <Text style={styles.title}>Login</Text>
-                <TextInput style={styles.input} placeholder='Email' placeholderTextColor='#cfcdce' value={form.email} onChangeText={(value)=> inputChange(value, 'email')}/>
-                <TextInput style={styles.input} placeholder='Password' placeholderTextColor='#cfcdce' value={form.password} onChangeText={(value)=> inputChange(value, 'password')} secureTextEntry={true}/>
-                <Text>{}</Text>
-            </View>
-            <View style={styles.btnWrapp}>
-               {user !== undefined?( 
-                <TouchableOpacity style={styles.loginBtn} onPress={sendData}>
-                    <Text style={styles.btnDesc}>Login</Text>
-                </TouchableOpacity>):(
-                <View>
-                    <Text style={{color:'red', marginBottom:20}}>Username or Password is incorect</Text>
-                    <TouchableOpacity style={styles.loginBtn} onPress={sendData}>
-                    <Text style={styles.btnDesc}>Login</Text>
-                </TouchableOpacity>
-                </View>
-               )
-               }
+            <Text style={styles.title}>Login</Text>
+            <Formik 
+                initialValues={{email:'', password:''}}
+                validationSchema={formValidation}
+                onSubmit={(values, actions) =>{
+                    actions.resetForm()
+                    dispatch(loginAction(values))
+                    if(isLogged === true){
+                        handleGoTo("Home")
+                    }
+                    
+                }}
+                >
+                    {(formikProps)=> (
+                        <View>
+                        <View style={styles.form}>
+                            <View>
+                               <TextInput 
+                                   style={styles.input} 
+                                   placeholder='Email' 
+                                   onChangeText={formikProps.handleChange("email")}
+                                   value={formikProps.values.email}
+                                   onBlur={formikProps.handleBlur('email')}
+                                   autoFocus
+                                 />
+                                 <Text style={{color:"red"}}>{formikProps.errors.email}</Text>
+                            </View>
+                            <View>
+                               <TextInput 
+                                   style={styles.input} 
+                                   placeholder='Password' 
+                                   onChangeText={formikProps.handleChange("password")}
+                                   value={formikProps.values.password}
+                                   onBlur={formikProps.handleBlur('password')}
+                                 />
+                                 <Text style={{color:"red"}}>{formikProps.errors.password}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.btnWrapp}>
+                            {user !== undefined?( 
+                                   <TouchableOpacity style={styles.loginBtn} onPress={formikProps.handleSubmit}>
+                                        <Text style={styles.btnDesc}>Login</Text>
+                                  </TouchableOpacity>):(
+                             <View>
+                                <Text style={{color:'red', marginBottom:20}}>Username or Password is incorect</Text>
+                                <TouchableOpacity style={styles.loginBtn} onPress={formikProps.handleSubmit}>
+                                           <Text style={styles.btnDesc}>Login</Text>
+                                </TouchableOpacity>
+                            </View>
+                               )
+                              }
+                      </View>
+                  </View>
+                    )}
+               </Formik>
                
             </View>
-        </View>
+        
     )
 }
 
@@ -95,7 +110,7 @@ const styles = StyleSheet.create({
         color:'#323335'
     },
     form:{
-        marginTop:80
+        marginTop:30
     },
     input:{
         borderBottomWidth:1,

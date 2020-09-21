@@ -21,7 +21,7 @@ const Home = ({navigation})=>{
         <View style={styles.container}>
             <View style={styles.mainContent}>
                 <Header navigation={navigation}/>
-                <ListFood/>  
+                <ListFood navigation={navigation}/>  
             </View>
             <ButtonNavigation navigation={navigation}/>
         </View>
