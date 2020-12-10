@@ -1,11 +1,18 @@
 import Axios from 'axios'
-import { search } from '../assets'
+
+
 
 export const ip = 'http://192.168.1.101:8000'
-
-export const getProductApi = ()=>{
-    return Axios.get(`${ip}/product`)
+export const localhost = '192.168.1.101'
+ 
+export const getProductApi = (page)=>{
+    return Axios.get(`${ip}/product?page=${page}&limit=10`)
 }
+export const loadMoreApi = (pageInfo)=>{
+    return Axios.get(`${ip}/${pageInfo}`)
+}
+
+
 export const searchMenuApi = (menu, price)=>{
     return Axios.get(`${ip}/product?search=${menu}&sort_by=${price}`)
 }

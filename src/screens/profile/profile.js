@@ -5,12 +5,13 @@ import { backIcon, profileImage, saltedEgg } from '../../assets'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import RecentOrder from '../../components/profile/recentOrder'
 
-import { form } from '../../redux/action/actionType'
-import { useSelector } from 'react-redux'
+import { lagoutAction } from '../../redux/action/auth'
+import { useSelector, useDispatch } from 'react-redux'
 
 
 
 const Profile = ({navigation})=>{
+    const dispatch = useDispatch()
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)
     }
@@ -24,7 +25,14 @@ const Profile = ({navigation})=>{
                 <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={{marginTop:5,}}>
                     <Image source={backIcon} style={styles.iconBack}/>
                 </TouchableOpacity>
-                 <Text style={styles.signOut}>Sign Out</Text>
+                <TouchableOpacity onPress={()=> {
+                    dispatch(lagoutAction())
+                    handleGoTo("WelcomeAuth"
+                    )
+                    }}>
+                <Text style={styles.signOut}>Sign Out</Text>
+                </TouchableOpacity>
+                
                  </View>
                  <View style={styles.profileHeader}>
                   <Image source={profileImage} style={styles.userImg}/>

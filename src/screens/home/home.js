@@ -12,7 +12,7 @@ import ButtonNavigation from '../../components/buttonNavigation'
 const Home = ({navigation})=>{
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(fetchProduct())
+        dispatch(fetchProduct(1))
     }, [])
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)

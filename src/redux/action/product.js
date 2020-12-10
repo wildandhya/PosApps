@@ -1,11 +1,18 @@
-import {getProductApi, searchMenuApi, addProduct, deleteProductApi} from '../../utils/http'
+import {getProductApi, searchMenuApi, addProduct, deleteProductApi, loadMoreApi} from '../../utils/http'
 // import Axios from 'axios'
-import {getAllproduct, searchMenu, addNewProduct, deleteProduct} from './actionType'
+import {getAllproduct, searchMenu, addNewProduct, deleteProduct, loadMore} from './actionType'
 
-export const fetchProduct = ()=>{
+export const fetchProduct = (page)=>{
     return {
         type:getAllproduct,
-        payload:getProductApi()
+        payload:getProductApi(page)
+        }
+    
+}
+export const loadMoreCreator = (pageInfo)=>{
+    return {
+        type:loadMore,
+        payload:loadMoreApi(pageInfo)
         }
     
 }

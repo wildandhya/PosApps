@@ -4,6 +4,7 @@ import {
     pending,
     fulfilled,
     rejected,
+    logout
   } from "../action/actionType";
   
   const initialState = {
@@ -86,6 +87,14 @@ import {
               user: payload.data.data,
               isPending: false,
             };
+            case logout:
+
+              return {
+                ...prevState,
+                isFulfilled: true,
+                user: [],
+                isPending: false,
+              };
       default:
         return prevState;
     }

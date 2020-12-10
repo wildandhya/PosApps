@@ -24,12 +24,12 @@ const Login = ({navigation})=>{
 
     })
 
-    // useEffect(()=>{
-    //     if(isLogged === true){
-    //         handleGoTo('Home')
-    //     }
+    useEffect(()=>{
+        if(user.msg === 'login success'){
+            handleGoTo('Home')
+        }
         
-    // }, [])
+    }, [user.msg])
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={()=> handleGoTo('WelcomeAuth')}>
@@ -42,9 +42,6 @@ const Login = ({navigation})=>{
                 onSubmit={(values, actions) =>{
                      actions.resetForm()
                     dispatch(loginAction(values))
-                    if(isLogged === true){
-                        handleGoTo("Home")
-                        } 
                 }}
                 >
                     {(formikProps)=> (

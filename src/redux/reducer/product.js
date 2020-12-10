@@ -5,6 +5,7 @@ import {
     rejected,
     searchMenu,
     goHome,
+    loadMore,
     addNewProduct,
     deleteProduct
   } from "../action/actionType";
@@ -36,9 +37,29 @@ import {
         return {
           ...prevState,
           isFulfilled: true,
-          data: payload.data.data,
+          data: payload.data,
           isPending: false,
         };
+        case loadMore + pending:
+          return {
+            ...prevState,
+            isPending: true,
+          };
+    
+        case loadMore + rejected:
+          return {
+            ...prevState,
+            isRejected: true,
+            error: payload,
+            isPending: false,
+          };
+        case loadMore + fulfilled:
+          return {
+            ...prevState,
+            isFulfilled: true,
+            data: payload.data,
+            isPending: false,
+          };
         case searchMenu + pending:
         return {
           ...prevState,

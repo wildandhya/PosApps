@@ -3,14 +3,14 @@ import {Dimensions, StyleSheet} from 'react-native'
 const {height, width} = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
-    foodWrapper:{
-        flex:1,
-        width:'100%',
-        flexDirection:'row',
-        justifyContent:'space-evenly',
-        flexWrap:'wrap',
-        marginTop:5
-    },
+    // foodWrapper:{
+    //     flex:1,
+    //     width:'100%',
+    //     flexDirection:'row',
+    //     justifyContent:'space-evenly',
+    //     flexWrap:'wrap',
+    //     marginTop:5
+    // },
     cardFood:{
         
         borderWidth: 1,
