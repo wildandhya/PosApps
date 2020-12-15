@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:'center',
         
-        backgroundColor:'#e70510',
+        backgroundColor:'#53b175',
         borderRadius:20
     },
     btn:{
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         color:'white'
     },
     rigthAction:{
-        backgroundColor:'#e70510',
+        backgroundColor:'#53b175',
         justifyContent:'center',
         alignItems:'flex-end',
         height:80,

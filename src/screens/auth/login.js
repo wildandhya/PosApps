@@ -1,143 +1,206 @@
-import React, {useEffect, useState} from 'react'
-import { StyleSheet,View , Text, TextInput, Image, Dimensions} from 'react-native'
+import React, {useEffect, useState} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Image,
+  Dimensions,
+} from 'react-native';
+import {Input} from "react-native-elements"
+import Icon from "react-native-vector-icons/Ionicons"
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {loginAction} from '../../redux/action/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginApi} from '../../utils/http'
+import {Formik} from 'formik';
+import * as yup from 'yup';
 
-import {backIcon} from '../../assets'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import {loginAction} from '../../redux/action/auth'
-import {useDispatch, useSelector} from 'react-redux'
-import {Formik} from 'formik'
-import * as yup from 'yup'
+const Login = ({navigation}) => {
+  const dispatch = useDispatch();
 
+  const {user, isLogged} = useSelector((state) => state.auth);
+  const [showPassword, setShowPassword] = useState(false)
 
-const Login = ({navigation})=>{
-    const dispatch = useDispatch()
+  const handleGoTo = (screen) => {
+    navigation.navigate(screen);
+  };
 
-    const {user, isLogged} = useSelector(state => state.auth)
-    
-    const handleGoTo = (screen)=>{
-        navigation.navigate(screen)
+  const formValidation = yup.object().shape({
+    email: yup.string().required().label('email').email(),
+    password: yup
+      .string()
+      .required()
+      .label('password')
+      .min(5, 'your password is to weak')
+      .max(10),
+  });
+
+  const handleSubmit = async (value)=>{
+    try{
+      let respons = await loginApi(value)
+      console.log(respons)
+      if (respons.data.success == true) {
+        handleGoTo('Home');
+      }
+    }catch(error){
+      const {response} = error
+      console.log(response)
     }
+  
+  }
 
-    const formValidation = yup.object().shape({
-        email:yup.string().required().label('email').email(),
-        password:yup.string().required().label('password').min(5, 'your password is to weak').max(10),
-
-    })
-
-    useEffect(()=>{
-        if(user.msg === 'login success'){
-            handleGoTo('Home')
-        }
-        
-    }, [user.msg])
-    return(
-        <View style={styles.container}>
-            <TouchableOpacity onPress={()=> handleGoTo('WelcomeAuth')}>
-                <Image source={backIcon} style={styles.iconBack}/>
-            </TouchableOpacity>
-            <Text style={styles.title}>Login</Text>
-            <Formik 
-                initialValues={{email:'', password:''}}
-                validationSchema={formValidation}
-                onSubmit={(values, actions) =>{
-                     actions.resetForm()
-                    dispatch(loginAction(values))
-                }}
-                >
-                    {(formikProps)=> (
-                        <View>
-                        <View style={styles.form}>
-                            <View>
-                               <TextInput 
-                                   style={styles.input} 
-                                   placeholder='Email' 
-                                   onChangeText={formikProps.handleChange("email")}
-                                   value={formikProps.values.email}
-                                   onBlur={formikProps.handleBlur('email')}
-                                   autoFocus
-                                 />
-                                 <Text style={{color:"red"}}>{formikProps.errors.email}</Text>
-                            </View>
-                            <View>
-                               <TextInput 
-                                   style={styles.input} 
-                                   placeholder='Password' 
-                                   onChangeText={formikProps.handleChange("password")}
-                                   value={formikProps.values.password}
-                                   onBlur={formikProps.handleBlur('password')}
-                                   secureTextEntry
-                                 />
-                                 <Text style={{color:"red"}}>{formikProps.errors.password}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.btnWrapp}>
-                            {user !== undefined?( 
-                                   <TouchableOpacity style={styles.loginBtn} onPress={formikProps.handleSubmit}>
-                                        <Text style={styles.btnDesc}>Login</Text>
-                                  </TouchableOpacity>):(
-                             <View>
-                                <Text style={{color:'red', marginBottom:20}}>Username or Password is incorect</Text>
-                                <TouchableOpacity style={styles.loginBtn} onPress={formikProps.handleSubmit}>
-                                           <Text style={styles.btnDesc}>Login</Text>
-                                </TouchableOpacity>
-                            </View>
-                               )
-                              }
-                      </View>
-                  </View>
-                    )}
-               </Formik>
-               
+  return (
+    <View style={style.container}>
+      <View style={style.subContainer}>
+        <View style={style.LoginHeader}>
+          <Text style={style.textLogin}>Login</Text>
+          <Text style={style.subTextLogin}>Enter your email and password</Text>
+        </View>
+        <Formik
+          initialValues={{email: '', password: ''}}
+          // validationSchema={formValidation}
+          onSubmit={(values, actions) => {
+            actions.resetForm();
+            handleSubmit(values)
+            dispatch(loginAction(values));
+          }}>
+          {(formikProps) => (
+            <View>
+              <View style={style.inputWrapper}>
+                <View style={style.emailWrap}>
+                  <Text style={style.label}>Email</Text>
+                  <Input
+                    inputContainerStyle={style.textInput}
+                    placeholder="Email"
+                    value={formikProps.values.email}
+                    onChangeText={formikProps.handleChange('email')}
+                  />
+                   {/* <Text>{formikProps.errors.email}</Text> */}
+                </View>
+                <View style={style.passwordWrapp}>
+                  <Text style={style.label}>Password</Text>
+                  <Input
+                    placeholder="Password"
+                    inputContainerStyle={style.textInput}
+                    secureTextEntry={!showPassword}
+                    value={formikProps.values.password}
+                    rightIcon={
+                      <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}>
+                        <Icon name={showPassword === false?"eye-off-outline":"eye-outline"} size={22} />
+                      </TouchableOpacity>
+                    }
+                    onChangeText={formikProps.handleChange('password')}
+                  />
+                   {/* <Text>{formikProps.errors.password}</Text> */}
+                </View>
+              </View>
+              <Text style={style.forgotPasswordText}>Forgot Password?</Text>
+              <View style={style.btnWrapper}>
+                <TouchableOpacity style={style.btnSubmit} onPress={formikProps.handleSubmit}>
+                  <Text style={style.textBtn}>Login</Text>
+                </TouchableOpacity>
+                <View style={style.directSignUp}>
+                  <Text style={style.textSignupAccount}>
+                    Don't have an account?
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Register')}>
+                    <Text style={style.textSignup}>SignUp</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-        
-    )
-}
+          )}
+        </Formik>
+      </View>
+    </View>
+  );
+};
 
-export default Login
+export default Login;
 
-const {height, width} = Dimensions.get('screen')
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor:'white',
-        padding:20,
+const { width, height } = Dimensions.get("screen")
+const style = StyleSheet.create({
+    container: {
+        backgroundColor: "#fcfcfc",
         height
-        
     },
-    iconBack:{
-        width:20,
-        height:20,
+    subContainer: {
+        marginTop: 130,
+        marginHorizontal: 25,
+        display:'flex'
     },
-    title:{
-        fontSize:20, 
-        fontWeight:'bold',
-        marginTop:30, 
-        textAlign:'center',
-        color:'#323335'
+    LoginHeader: {
+
     },
-    form:{
+    textLogin: {
+        fontSize: 29,
+        color: "#181725",
+        fontWeight: "bold"
+    },
+    subTextLogin: {
+        fontSize: 16,
+        color: "#7c7c7c",
+        marginTop: 15,
+        fontWeight: 'normal'
+    },
+    inputWrapper: {
+        marginTop: 40
+    },
+    textInput: {
+        borderBottomColor: "#e2e2e2",
+        borderBottomWidth: 1,
+        fontSize:18,
+        color:"#181725",
+    },
+    iconCheck:{
+        color:'#53b175'
+    },
+    passwordWrapp:{
         marginTop:30
     },
-    input:{
-        borderBottomWidth:1,
-        borderColor:'#d9d9d9',
-        borderRadius:5
-        
+    label: {
+        fontSize: 16,
+        color: "#7c7c7c",
+        fontWeight: 'normal'
     },
-    btnWrapp:{
-        
+    forgotPasswordText:{
+        fontSize:14,
+        color:"#181725",
+        alignSelf:'flex-end',
+        marginTop:20
     },
-    loginBtn:{
-        backgroundColor:'#6e241c', 
-        borderRadius:13, 
-        paddingVertical:10
+    btnWrapper:{
+        marginTop:30
     },
-    btnDesc:{
-        fontSize:12,
-        color:'white',
+    btnSubmit:{
+        backgroundColor:"#53b175",
+        paddingVertical:18,
+        borderRadius:15,
+    },
+    textBtn:{
+        color:"#fff",
         textAlign:'center',
-        paddingHorizontal:'15%',
-        marginBottom:6
+        fontSize:18,
+        fontWeight:"600"
     },
+    directSignUp:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        marginTop:25
+    },
+    textSignupAccount:{
+        color:'#030303',
+        fontSize:14,
+        fontWeight:'bold'
+    },
+    textSignup:{
+        color:"#53b175",
+        fontSize:14,
+        fontWeight:'600',
+        marginLeft:3
 
-
+    }
 })

@@ -6,7 +6,13 @@ import {loginApi, registerApi} from '../../utils/http'
 export const loginAction = (data) => {
     return{
         type:login,
-        payload: loginApi(data)
+        payload: new Promise((resolve, reject)=>{
+            loginApi(data).then((data)=>{
+                resolve(data)
+            }).catch((err)=>{
+                resolve(err.response)
+            })
+        })
     };
 
 }

@@ -37,12 +37,9 @@ const ListFood = ({navigation}) =>{
           dispatch(addMenu(cartData));
         }
       };
-    const handleLoadMore = ()=>{
-       dispatch(fetchProduct(1+1))
-    }
     return(
        <FlatList
-       style={{flexDirection:'row', flexWrap:'wrap', width:'100%'}}
+       style={{flexDirection:'row', flexWrap:'wrap',  marginTop:60}}
        data={product}
        renderItem={({item})=>{
          return(
@@ -70,9 +67,7 @@ const ListFood = ({navigation}) =>{
    </View>
          )
        }}
-       keyExtractor={item=> item.id}
-      //  onEndReached={()=> handleLoadMore()}
-      //  onEndReachedThreshold={0.1}
+      
        />
              
     )

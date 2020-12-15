@@ -8,6 +8,7 @@ import Footer from '../../components/pay/footer'
 import ListPayment from '../../components/pay/listPayment'
 
 
+
 const Pay = ({navigation})=>{
     const handleGoTo = (screen)=>{
         navigation.navigate(screen)
@@ -21,6 +22,7 @@ const Pay = ({navigation})=>{
             <View>
                 <Footer/>
             </View>
+           
         </View>
 
     )

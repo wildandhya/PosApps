@@ -7,7 +7,6 @@ import {useDispatch} from 'react-redux'
 import {fetchProduct} from '../../redux/action/product'
 import  Header  from '../../components/home/header'
 import ListFood from '../../components/home/listfood'
-import ButtonNavigation from '../../components/buttonNavigation'
 
 const Home = ({navigation})=>{
     const dispatch = useDispatch()
@@ -23,7 +22,6 @@ const Home = ({navigation})=>{
                 <Header navigation={navigation}/>
                 <ListFood navigation={navigation}/>  
             </View>
-            <ButtonNavigation navigation={navigation}/>
         </View>
     )
 }

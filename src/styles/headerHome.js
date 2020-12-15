@@ -12,10 +12,9 @@ const styles = StyleSheet.create({
     searchBar:{
         backgroundColor:'white',
         height:40,
-        width:250,
         borderWidth:2,
-        borderColor:'#e70510',
-        borderRadius:30,
+        borderColor:'#53b175',
+        borderRadius:15,
         fontSize:13,
         paddingLeft:45,
         paddingRight:20,
@@ -31,10 +30,13 @@ const styles = StyleSheet.create({
         height:20,
         position:"absolute",
         top:10,
-        left:10
+        left:10,
     },
     searchWrapper:{
-        position:'relative'
+        position:'relative',
+        width:'80%',
+        marginTop:50
+      
     },
     
 })

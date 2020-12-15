@@ -9,7 +9,7 @@ import {
   
   const initialState = {
     user: [],
-    error: "",
+    error: [],
     isPending: false,
     isFulfilled: false,
     isRejected: false,

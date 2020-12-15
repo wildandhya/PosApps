@@ -8,11 +8,9 @@
 
 import React from 'react';
 
-import Router from './src/router/index';
+import ButtomNavigator from './src/router/index';
 import { NavigationContainer } from '@react-navigation/native';
 import {Provider} from 'react-redux'
-
-
 import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './src/redux/store';
 
@@ -24,7 +22,7 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
       <NavigationContainer>
-        <Router/>
+        <ButtomNavigator/>
       </NavigationContainer>
       </PersistGate>
     </Provider>

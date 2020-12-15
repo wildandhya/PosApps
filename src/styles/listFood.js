@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         
     },
     header:{
-        marginTop:10
+        marginTop:20
     },
     foodImg:{
         width:150,

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { StyleSheet,View , Text, TextInput, Image, Dimensions} from 'react-native'
+import { StyleSheet,View , Text, Dimensions, StatusBar} from 'react-native'
 
 import {logoIndomie} from '../../assets'
 
@@ -7,12 +7,15 @@ import {logoIndomie} from '../../assets'
 const SplashScreen = ({navigation})=>{
     useEffect(() => {
         setTimeout(()=>{
-            navigation.replace('WelcomeAuth')
+            navigation.replace('Login')
         }, 3000)
     })
     return(
         <View style={styles.container}>
-            <Image source={logoIndomie} style={styles.logo}/>
+            <StatusBar backgroundColor="#53b175"/>
+            <Text style={styles.logo}>
+                eatFood
+            </Text>
         </View>
     )
 }
@@ -22,14 +25,18 @@ export default SplashScreen
 const {height, width} = Dimensions.get('screen')
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:'#e70510',
+        backgroundColor:"#53b175",
         padding:20,
-        height
+        height,
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center'
     },
     logo:{
-        width:150,
-        height:90,
-        marginVertical:'65%',
-        marginHorizontal:'25%'
+      
+       fontSize:35,
+       fontWeight:'bold',
+       color:'#fff',
+      
     }
 })

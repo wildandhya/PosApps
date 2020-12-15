@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet ,Text, View , Dimensions, Image} from 'react-native'
+import { StyleSheet ,Text, View , Dimensions, StatusBar} from 'react-native'
 import { useSelector } from 'react-redux'
 import { backIcon, menu } from '../../assets'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -8,16 +8,15 @@ const Header = ({onPress})=>{
     const cart = useSelector(state=> state.cart.data)
     return(
         <View style={styles.container}>
+            <StatusBar backgroundColor='#fff'/>
             <View style={styles.cart}>
-                <TouchableOpacity onPress={onPress} style={{marginTop:5,}}>
+                {/* <TouchableOpacity onPress={onPress} style={{marginTop:5,}}>
                     <Image source={backIcon} style={styles.iconBack}/>
-                </TouchableOpacity>
-                <View>
-                <Text style={styles.cartTitle}>Cart</Text>
-                </View>
-                <TouchableOpacity onPress={onPress} style={{marginTop:5,}}>
-                    <Image source={menu} style={styles.iconMenu}/>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+              
+                <Text style={styles.cartTitle}>My Cart</Text>
+                
+               
             </View>
         </View>
         
@@ -36,11 +35,7 @@ const styles = StyleSheet.create({
     },
     cart:{
         backgroundColor:'white',
-        height:50,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'       
-       
+        justifyContent:'center'   
     },
     cartTitle:{
         fontSize:23,

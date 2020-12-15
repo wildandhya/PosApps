@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     cartTotal:{
         fontSize:15,
         fontWeight:'bold',
-        color:'#323335'
+        color:'#323335',
     },
     TotalPrice:{
         fontSize:14,
