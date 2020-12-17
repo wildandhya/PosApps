@@ -8,7 +8,7 @@ import {
   WelcomeAuth,
   SplashScreen,
   Cart,
-  Pay,
+  ModalSuccess,
   AddProduct,
   Profile,
   EditProduct,
@@ -41,7 +41,7 @@ const CartStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen name="Pay" component={Pay} />
+      <Stack.Screen name="ModalSuccess" component={ModalSuccess} />
     </Stack.Navigator>
   );
 };

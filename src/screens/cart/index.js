@@ -6,26 +6,26 @@ import {
   StatusBar,
   Text,
   Image,
-  Button,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import {plusBtn, minusBtn, deleteMenu} from '../../redux/action/cart';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated from 'react-native-reanimated';
-import BottomSheet from 'react-native-bottomsheet-reanimated';
+import BottomSheet from 'reanimated-bottom-sheet';
 import {primary, textBtnColor} from '../../assets/color';
 import {ListItem, Avatar} from 'react-native-elements';
 import {localhost} from '../../utils/http';
 import Icon from 'react-native-vector-icons/Feather';
 
 const Cart = ({navigation}) => {
+  const cart = useSelector((state) => state.cart.data);
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const window = Dimensions.get('window');
   const handleGoTo = (screen) => {
     navigation.navigate(screen);
   };
-  const cart = useSelector((state) => state.cart.data);
-  const [backgroundDrawer, setBackgroundDrawer] = useState(false);
-  const dispatch = useDispatch();
 
   const increaseBtn = (id) => {
     const checkId = cart.findIndex((item) => {
@@ -39,6 +39,7 @@ const Cart = ({navigation}) => {
     });
     dispatch(minusBtn(checkId));
   };
+
   const RightAction = (id) => {
     return (
       <TouchableOpacity onPress={() => dispatch(deleteMenu(id))}>
@@ -65,30 +66,34 @@ const Cart = ({navigation}) => {
     },
   ];
 
-
   const renderContent = () => (
     <View style={styles.drawer}>
       <View style={styles.drawerContent}>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 10,
-          marginTop:6
-        }}>
-        <Text style={styles.titleCheckout}>Checkout</Text>
-        <TouchableOpacity onPress={()=> sheetRef.current.snapTo(1)}>
-          <Icon name="x" size={25} />
-        </TouchableOpacity>
-      </View>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginHorizontal: 14,
+            marginTop: 15,
+          }}>
+          <Text style={styles.titleCheckout}>Checkout</Text>
+          <TouchableOpacity onPress={onClose} style={{alignItems:'center'}}>
+            <Icon name="x" size={25} />
+          </TouchableOpacity>
+        </View>
         {list.map((item, i) => (
           <ListItem key={i} bottomDivider>
-            <ListItem.Content>
+            <ListItem.Content
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
               <ListItem.Title>{item.title}</ListItem.Title>
-              <ListItem.Subtitle>{item.data}</ListItem.Subtitle>
+              <ListItem.Subtitle right={true}>{item.data}</ListItem.Subtitle>
             </ListItem.Content>
-            <ListItem.Chevron size={33} color="#181725" />
+            <ListItem.Chevron size={30} color="#181725"  />
           </ListItem>
         ))}
         <TouchableOpacity style={styles.btnDrawer}>
@@ -98,14 +103,22 @@ const Cart = ({navigation}) => {
     </View>
   );
 
+  const onOpen = () => {
+    setIsOpen(true);
+    sheetRef.current.snapTo(0);
+  };
+  const onClose = () => {
+    setIsOpen(false);
+    sheetRef.current.snapTo(1);
+  };
+
   const sheetRef = React.createRef();
   const fall = new Animated.Value(1);
+
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#fff" />
       <BottomSheet
         ref={sheetRef}
-        
         snapPoints={[340, 0]}
         borderRadius={10}
         renderContent={renderContent}
@@ -114,10 +127,19 @@ const Cart = ({navigation}) => {
         enabledGestureInteraction={true}
       />
       <Animated.View
-        style={{
-          flex: 1,
-          opacity: Animated.add(0.1, Animated.multiply(fall, 3.0)),
-        }}>
+        style={
+          isOpen === true
+            ? {
+                flex: 1,
+                backgroundColor: '#000',
+                width: window.width,
+                opacity: Animated.add(0.1, Animated.multiply(fall, 0.1)),
+              }
+            : {
+                flex: 1,
+                opacity: Animated.add(0.1, Animated.multiply(fall, 3.0)),
+              }
+        }>
         <Text style={styles.headerTitle}>My Cart</Text>
         <View style={styles.contentWrapp}>
           {cart.map((item, index) => {
@@ -162,9 +184,7 @@ const Cart = ({navigation}) => {
         </View>
       </Animated.View>
       <View style={styles.drawerWrapp}>
-        <TouchableOpacity
-          style={styles.btnOpenDrawer}
-          onPress={() => sheetRef.current.snapTo(0)}>
+        <TouchableOpacity style={styles.btnOpenDrawer} onPress={onOpen}>
           <Text style={styles.btnText}>Go to Checkout</Text>
         </TouchableOpacity>
       </View>
@@ -181,6 +201,7 @@ const styles = StyleSheet.create({
     height,
     display: 'flex',
     flex: 1,
+    position: 'relative',
   },
   contentWrapp: {
     flex: 1,
@@ -256,7 +277,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: primary,
     padding: 15,
-    marginTop: 10,
+    marginTop: 20,
   },
   btnOpenDrawer: {
     borderRadius: 15,
@@ -291,6 +312,7 @@ const styles = StyleSheet.create({
     color: '#181725',
     fontSize: 24,
     fontWeight: 'bold',
+   
   },
   drawerWrapp: {
     width,

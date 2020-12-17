@@ -1,118 +1,129 @@
-import React from 'react'
-import {  StyleSheet,View, Dimensions , Image, Text, ImageBackground} from 'react-native'
-import { backIcon, profileImage, saltedEgg } from '../../assets'
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Image,
+  Text,
+  StatusBar,
+} from 'react-native';
+import {profileImage} from '../../assets';
+import {TouchableOpacity, FlatList} from 'react-native-gesture-handler';
+import {lagoutAction} from '../../redux/action/auth';
+import {useSelector, useDispatch} from 'react-redux';
+import {ListItem, Icon} from 'react-native-elements';
+import {primary} from '../../assets/color/index';
+import Pencil from 'react-native-vector-icons/EvilIcons';
+import Exit from 'react-native-vector-icons/Feather';
+import CardId from 'react-native-vector-icons/AntDesign';
+import Pin from 'react-native-vector-icons/Ionicons';
 
-import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
-import RecentOrder from '../../components/profile/recentOrder'
+const Profile = ({navigation}) => {
+  const dispatch = useDispatch();
+  const handleGoTo = (screen) => {
+    navigation.navigate(screen);
+  };
+  const {user} = useSelector((state) => state.auth);
+  console.log(user);
 
-import { lagoutAction } from '../../redux/action/auth'
-import { useSelector, useDispatch } from 'react-redux'
+  const list = [
+    {
+      title: 'Order',
+      icon: 'shopping-bag',
+      type: 'Feather',
+    },
+    {
+      title: 'My Detail',
+      icon: 'idCard',
+      type: 'AntDesign',
+    },
+    {
+      title: 'Delevery Address',
+      icon: 'md-location-sharp',
+      type: 'Ionicons',
+    },
+  ];
 
-
-
-const Profile = ({navigation})=>{
-    const dispatch = useDispatch()
-    const handleGoTo = (screen)=>{
-        navigation.navigate(screen)
-    }
-    const {user} = useSelector(state=>state.auth)
-    console.log(user)
-    return(
-        <View style={styles.container}>
-            <View style={styles.profileWrapp}>
-             <ImageBackground source={saltedEgg} style={styles.backgroundImg}>
-                 <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:10, marginHorizontal:8}}>
-                <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={{marginTop:5,}}>
-                    <Image source={backIcon} style={styles.iconBack}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={()=> {
-                    dispatch(lagoutAction())
-                    handleGoTo("WelcomeAuth"
-                    )
-                    }}>
-                <Text style={styles.signOut}>Sign Out</Text>
-                </TouchableOpacity>
-                
-                 </View>
-                 <View style={styles.profileHeader}>
-                  <Image source={profileImage} style={styles.userImg}/>
-                  <Text style={{ color:'#fff', fontWeight:'bold'}}>{user.name}</Text>
-                  <Text style={{ color:'#fff'}}>{user.email}</Text>
-                  <TouchableOpacity style={styles.editProfile}>
-                      <Text style={{color:'#fff'}}>Edit Profile</Text>
-                 </TouchableOpacity>
-               </View>
-            </ImageBackground>
+  return (
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#fff" />
+      <View style={styles.subContainer}>
+        <View style={styles.profileWrapp}>
+          <Image source={profileImage} style={styles.userImg} />
+          <View style={styles.textContainer}>
+            <View style={{display: 'flex', flexDirection: 'row'}}>
+              <Text style={{color: '#000', fontWeight: 'bold', fontSize: 20}}>
+                Wildan
+              </Text>
+              <TouchableOpacity>
+                <Pencil name="pencil" size={27} color={primary} />
+              </TouchableOpacity>
             </View>
-            <View style={styles.segment}>
-                <TouchableOpacity>
-                   <RecentOrder/>
-                </TouchableOpacity>
-            </View>
+            <Text style={{color: '#7c7c7c', fontSize: 16}}>
+              Wildandhya15@gmail.com
+            </Text>
+          </View>
         </View>
+        <View style={{marginTop: 30}}>
+          {list.map((item, i) => (
+            <ListItem bottomDivider>
+              <Icon name={item.icon} />
+              <ListItem.Content>
+                <ListItem.Title>{item.title}</ListItem.Title>
+              </ListItem.Content>
+              <ListItem.Chevron size={26} color="#181725" />
+            </ListItem>
+          ))}
+        </View>
+        <View style={{marginTop: 50}}>
+          <TouchableOpacity style={styles.btnLogout}>
+            <Text style={styles.textBtn}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+};
 
-    )
-}
+export default Profile;
 
-export default Profile
-
-const {height, width} = Dimensions.get('screen')
+const {height, width} = Dimensions.get('screen');
 const styles = StyleSheet.create({
-    container:{
-        // backgroundColor:'#e7ebef',
-        backgroundColor:'#fff',
-        height,
-        flex:1
-        
-    },
-    iconBack:{
-        width:17,
-        height:17,
-        // justifyContent:"center"
-    },
-    userImg:{
-        width:70,
-        height:70,
-        borderRadius:40,
-        borderColor:'#d9d9d9',
-        borderWidth:1
-    },
-    profileHeader:{
-        alignItems:"center",
-        paddingVertical:8,
-        justifyContent:'center',
-       
-        
-    },
-    editProfile:{
-        borderWidth:1,
-        padding:5,
-        borderColor:'#353535',
-        marginTop:5,
-        borderRadius:7,
-        backgroundColor:'#5e5c5d',
-       
-    },
-    segment:{
-        
-        
-        
-    },
-    profileWrapp:{
-        height:200,
-        
-    },
-    backgroundImg:{
-        width:'100%',
-        height:'100%',
-        opacity:0.7,
-        backgroundColor:'black'
-    },
-    signOut:{
-        
-        color:'#fff',
-        fontWeight:'bold',
-        
-        
-    }
-})
+  container: {
+    backgroundColor: '#fff',
+    height,
+  },
+  profileWrapp: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  subContainer: {
+    marginHorizontal: 25,
+    marginTop: 40,
+  },
+  textContainer: {
+    alignSelf: 'center',
+    marginLeft: 8,
+  },
+  userImg: {
+    width: 70,
+    height: 70,
+    borderRadius: 40,
+    borderColor: '#d9d9d9',
+    borderWidth: 1,
+  },
+  btnLogout: {
+    backgroundColor: '#f2f3f2',
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textBtn: {
+    color: primary,
+    padding: 16,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});
